@@ -30,8 +30,9 @@ module LocalizedCountrySelect
     #   priority_countries_array([:TW, :CN])
     #   # => [ ['Taiwan', 'TW'], ['China', 'CN'] ]
     def priority_countries_array(country_codes=[])
+      country_codes.map! { |code| code.to_s.upcase }
       countries = I18n.translate(:countries)
-      country_codes.map { |code| [countries[code], code.to_s.upcase] }
+      country_codes.map { |code| [countries[code.to_sym], code] }
     end
   end
 end
