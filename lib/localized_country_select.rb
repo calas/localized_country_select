@@ -1,20 +1,20 @@
 # = LocalizedCountrySelect
-# 
+#
 # View helper for displaying select list with countries:
-# 
+#
 #     localized_country_select(:user, :country)
-# 
+#
 # Works just like the default Rails' +country_select+ plugin, but stores countries as
 # country *codes*, not *names*, in the database.
-# 
+#
 # You can easily translate country codes in your application like this:
 #     <%= I18n.t @user.country, :scope => 'countries' %>
-# 
+#
 # Uses the Rails internationalization framework (I18n) for translating the names of countries.
-# 
+#
 # Use Rake task <tt>rake import:country_select 'de'</tt> for importing country names
 # from Unicode.org's CLDR repository (http://www.unicode.org/cldr/data/charts/summary/root.html)
-# 
+#
 # Code adapted from Rails' default +country_select+ plugin (previously in core)
 # See http://github.com/rails/country_select/tree/master/lib/country_select.rb
 #
@@ -41,7 +41,7 @@ module ActionView
 
     module FormOptionsHelper
 
-      # Return select and option tags for the given object and method, using +localized_country_options_for_select+ 
+      # Return select and option tags for the given object and method, using +localized_country_options_for_select+
       # to generate the list of option tags. Uses <b>country code</b>, not name as option +value+.
       # Country codes listed as an array of symbols in +priority_countries+ argument will be listed first
       # TODO : Implement pseudo-named args with a hash, not the "somebody said PHP?" multiple args sillines
@@ -60,7 +60,7 @@ module ActionView
                     { "name" => name, "id" => name }.update(html_options.stringify_keys)
       end
 
-      # Returns a string of option tags for countries according to locale. Supply the country code in upper-case ('US', 'DE') 
+      # Returns a string of option tags for countries according to locale. Supply the country code in upper-case ('US', 'DE')
       # as +selected+ to have it marked as the selected option tag.
       # Country codes listed as an array of symbols in +priority_countries+ argument will be listed first
       def localized_country_options_for_select(selected = nil, priority_countries = nil)
@@ -71,7 +71,7 @@ module ActionView
         end
         return country_options + options_for_select(LocalizedCountrySelect::localized_countries_array, selected)
       end
-      
+
     end
 
     class InstanceTag
@@ -87,7 +87,7 @@ module ActionView
         )
       end
     end
-    
+
     class FormBuilder
       def localized_country_select(method, priority_countries = nil, options = {}, html_options = {})
         @template.localized_country_select(@object_name, method, priority_countries, options.merge(:object => @object), html_options)
