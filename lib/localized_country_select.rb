@@ -49,6 +49,7 @@ module ActionView
         InstanceTag.new(object, method, self, options.delete(:object)).
           to_localized_country_select_tag(priority_countries, options, html_options)
       end
+      alias_method :country_select, :localized_country_select
 
       # Return "named" select and option tags according to given arguments.
       # Use +selected_value+ for setting initial value
@@ -59,6 +60,7 @@ module ActionView
                     localized_country_options_for_select(selected_value, priority_countries),
                     { "name" => name, "id" => name }.update(html_options.stringify_keys)
       end
+      alias_method :country_select_tag, :localized_country_select_tag
 
       # Returns a string of option tags for countries according to locale. Supply the country code in upper-case ('US', 'DE')
       # as +selected+ to have it marked as the selected option tag.
@@ -71,6 +73,7 @@ module ActionView
         end
         return country_options + options_for_select(LocalizedCountrySelect::localized_countries_array, selected)
       end
+      alias_method :country_options_for_select, :localized_country_options_for_select
 
     end
 
@@ -92,6 +95,7 @@ module ActionView
       def localized_country_select(method, priority_countries = nil, options = {}, html_options = {})
         @template.localized_country_select(@object_name, method, priority_countries, options.merge(:object => @object), html_options)
       end
+      alias_method :country_select, :localized_country_select
     end
 
   end
